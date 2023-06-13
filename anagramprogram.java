@@ -29,12 +29,21 @@ public static void main(String [] args) {
             System.out.println("New iteration!");
             for(int position = iterate + 1; iterate2 <= input.length()-1; iterate2++){
                 if(position +1 > input.length()){
-                    System.out.println("Move to the beginning");
+                    //System.out.println("Move to the beginning");
+                    
+                    char tempchar = thewordagain[position-1];
+                    thewordagain[position-1] = thewordagain[0];
+                    thewordagain[0] = tempchar;
+                    System.out.print("RESET: ");
+                    System.out.println(thewordagain);
+                    position=1;
                 }
 
             else{
-                char tempchar = theword[position];
-                //System.out.println("The position is " + position );
+                char tempchar = thewordagain[position];
+                if(theword[iterate] == 'e'){
+                    System.out.println("The position is " + position );
+                }               
                 thewordagain[position] = theword[iterate];
                 thewordagain[position - 1] = tempchar;
                 System.out.println(thewordagain);
