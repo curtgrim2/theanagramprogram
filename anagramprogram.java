@@ -18,111 +18,32 @@ public static void main(String [] args) {
 
        else{
 
-            int totalvariations = 0;
+           /* Plan: Have each charcter iterate the input.length - 1 ( input.length would have the
+           word end in the original position) Have the newly formed word submitted into an ArrayList and 
+           check if the word already exists in the array.*/
 
-            for(int base = 0; base < input.length(); base++){ 
-               // for(int iterator = 0 ; iterator < input.length(); iterator++){
 
-                    thewordagain = input.toCharArray();
-                    char [] tempword = thewordagain;
+           for(int iterate = 0; iterate < input.length(); iterate++){
+            thewordagain = input.toCharArray();
+            int iterate2 = 0;
+            System.out.println("New iteration!");
+            for(int position = iterate + 1; iterate2 <= input.length()-1; iterate2++){
+                if(position +1 > input.length()){
+                    System.out.println("Move to the beginning");
+                }
 
-                    int wordcount = 0;
-                    int baselocation = base;
-                    System.out.println("    New Start with " + baselocation + " and " + wordcount);
-                    while(wordcount < input.length() -1){
- 
-                     if(baselocation+1 == input.length() ){
-                          /*Plan: We want to place the base letter (when it reaches the last index)
-                           at the beginning while shifting all the other letters down
-                           */
+            else{
+                char tempchar = theword[position];
+                //System.out.println("The position is " + position );
+                thewordagain[position] = theword[iterate];
+                thewordagain[position - 1] = tempchar;
+                System.out.println(thewordagain);
+                position++;
 
-                           char temp = thewordagain[0];
-                           thewordagain[0] = theword[base];
-                           thewordagain[1] = temp;
-                           int letsgo = 2;
-                           
-                           System.out.println("Word in use: " + String.valueOf(tempword));
-                           while(letsgo < input.length()-1 ){
-                            temp = tempword[letsgo + 1];
-                            thewordagain[letsgo+1] = tempword[letsgo];
-                            thewordagain[letsgo] = temp;
-                            letsgo++;
-                            //System.out.println(thewordagain);
-
-                           }
-                        } 
-                            
-                           
-                /*    if(baselocation+1 == input.length() ){
-                        char temp = thewordagain[0];
-                       thewordagain[0]= theword[base];
-                       thewordagain[baselocation] = temp;
-
-                       System.out.print("RESET baselocation: " + "(" + baselocation + ") ");
-
-                        baselocation = base;
-                        //baselocation--;
-                       }*/
-                    else{
-                       char temp = theword[baselocation+1];
-                       thewordagain[baselocation + 1]= theword[base];
-                       thewordagain[baselocation] = temp;
-                    }
-
-                        System.out.println(thewordagain);
-                        totalvariations++;
-                        wordcount++;
-                        baselocation++;
-                    
-                    }                   
-               // }
+                }
+                
             }
-
-            System.out.println("Total number of variations: " + totalvariations);
-
-
-/* 
-                for(int x = 0 ; x< input.length(); x++){
-                    char temphold = thewordagain[input.length()-1];
-                    thewordagain[input.length()-1] = theword[x];
-                    thewordagain[x] = temphold;
-                    System.out.println(thewordagain);
-                } */
-
-                //System.out.println("Base word cycle: DONE");
-
-                //Second method: Selective Letter Cycle
-                //thewordagain = input.toCharArray();
-
-              /*   for(int iterator = 0; iterator< input.length(); iterator++){
-                    thewordagain = input.toCharArray();
-                    char temphold = theword[0];
-                    thewordagain[0] = theword[iterator];
-                    thewordagain[iterator] = temphold;
-                    System.out.println(thewordagain);
-                    System.out.println("And boom: ");
-
-                for(int iterator2 = iterator + 1; iterator2 <= input.length(); iterator2++){
-                        if(iterator2 -1 == 10){
-                            System.out.println("Lets skip this one");
-                            continue;
-                        }
-
-                        if(iterator2 + 1 < input.length()){
-                        char temphold2 = thewordagain[iterator2];                     
-                        thewordagain[iterator2] = thewordagain[iterator2 +1];
-                        thewordagain[iterator2 +1 ] = temphold2;
-                        System.out.println(thewordagain);
-                        }
-
-                        else{
-                            System.out.print("Uh oh ");
-                            System.out.println(thewordagain);
-                            //Move the last element to the second index? 
-                        }
-                    } 
-                } */
-
+           }
 
        }
     }
