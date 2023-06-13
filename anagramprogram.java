@@ -24,77 +24,61 @@ public static void main(String [] args) {
                // for(int iterator = 0 ; iterator < input.length(); iterator++){
 
                     thewordagain = input.toCharArray();
+                    char [] tempword = thewordagain;
 
                     int wordcount = 0;
-
-                    
-                   /*  thewordagain[0] = theword[base];
-                    thewordagain[base] = theword[0];
-                    wordcount++;*/
-                    //System.out.println(thewordagain);
-
                     int baselocation = base;
                     System.out.println("    New Start with " + baselocation + " and " + wordcount);
                     while(wordcount < input.length() -1){
+ 
+                     if(baselocation+1 == input.length() ){
+                          /*Plan: We want to place the base letter (when it reaches the last index)
+                           at the beginning while shifting all the other letters down
+                           */
 
-/* 
-                        if(baselocation+1 == input.length() ){
-                            char temp = thewordagain[0];
-                           thewordagain[0]= theword[base];
-                           //thewordagain[baselocation] = temp;
-    
-                           System.out.print("RESET baselocation: " + "(" + baselocation + ") ");
-    
-                            //baselocation = base;
+                           char temp = thewordagain[0];
+                           thewordagain[0] = theword[base];
+                           thewordagain[1] = temp;
+                           int letsgo = 2;
+                           
+                           System.out.println("Word in use: " + String.valueOf(tempword));
+                           while(letsgo < input.length()-1 ){
+                            temp = tempword[letsgo + 1];
+                            thewordagain[letsgo+1] = tempword[letsgo];
+                            thewordagain[letsgo] = temp;
+                            letsgo++;
+                            //System.out.println(thewordagain);
 
-                            int letsgo = 0;
-                            
-
-                            while(letsgo<input.length()-1){
-                                thewordagain[++letsgo] = theword[letsgo];
-
-                             }
-
-                        } */
+                           }
+                        } 
                             
                            
-
-                   if(baselocation+1 == input.length() ){
+                /*    if(baselocation+1 == input.length() ){
                         char temp = thewordagain[0];
                        thewordagain[0]= theword[base];
                        thewordagain[baselocation] = temp;
 
                        System.out.print("RESET baselocation: " + "(" + baselocation + ") ");
 
-
                         baselocation = base;
                         //baselocation--;
-                       }
+                       }*/
                     else{
                        char temp = theword[baselocation+1];
                        thewordagain[baselocation + 1]= theword[base];
                        thewordagain[baselocation] = temp;
-
                     }
-
 
                         System.out.println(thewordagain);
                         totalvariations++;
                         wordcount++;
                         baselocation++;
                     
-                    }
-
-                   
-                    
+                    }                   
                // }
             }
 
             System.out.println("Total number of variations: " + totalvariations);
-
-
-
-
 
 
 /* 
