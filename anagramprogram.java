@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class anagramprogram{
 public static void main(String [] args) {
@@ -8,10 +9,10 @@ public static void main(String [] args) {
         while(scan.hasNext()){
         String input = scan.nextLine();
 
-        
+        ArrayList<String> possibilities = new ArrayList<String>();
         char [] theword = input.toCharArray();
         char [] thewordagain = input.toCharArray();
-         if(!input.equals("case")){ 
+         if(!input.equals("hat")){ 
             //Make this the if statement that checks if there is a number in the input
             System.out.print("We are in the testing phase; Please input 'case'");
         } 
@@ -28,30 +29,33 @@ public static void main(String [] args) {
             int iterate2 = 0;
             System.out.println("New iteration!");
             for(int position = iterate + 1; iterate2 <= input.length()-1; iterate2++){
-                if(position +1 > input.length()){
-                    //System.out.println("Move to the beginning");
-                    
+                if(position +1 > input.length()){                    
                     char tempchar = thewordagain[position-1];
                     thewordagain[position-1] = thewordagain[0];
                     thewordagain[0] = tempchar;
-                    System.out.print("RESET: ");
-                    System.out.println(thewordagain);
+                    /*System.out.print("RESET: ");
+                    System.out.println(thewordagain);*/
                     position=1;
                 }
 
             else{
-                char tempchar = thewordagain[position];
-                if(theword[iterate] == 'e'){
-                    System.out.println("The position is " + position );
-                }               
+                char tempchar = thewordagain[position];          
                 thewordagain[position] = theword[iterate];
                 thewordagain[position - 1] = tempchar;
-                System.out.println(thewordagain);
+                if(!possibilities.contains(String.valueOf(thewordagain))){
+                    //System.out.println(thewordagain);
+                    possibilities.add(String.valueOf(thewordagain));
+                }
+                
                 position++;
 
                 }
                 
             }
+           }
+
+           for(int x = 0; x<possibilities.size(); x++){
+                System.out.println(possibilities.get(x));
            }
 
        }
