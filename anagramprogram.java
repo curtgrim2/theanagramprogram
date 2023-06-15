@@ -19,58 +19,145 @@ public static void main(String [] args) {
 
        else{
 
-           /* Plan: Have each charcter iterate the input.length - 1 ( input.length would have the
-           word end in the original position) Have the newly formed word submitted into an ArrayList and 
-           check if the word already exists in the array.*/
+           /* NEW Plan: Create a for loop that represents each letter within the word. Encased within that
+           should be a while loop that iterates through all the possibilities with the 
+           next couple of letters thats not the one of focus. Noted that with each FOCUSED 
+           letter, we should loop it to the front and procede to the while loop from there.(TOTAL LETTERS - 1) . */
 
+            int combocounter = 0;
+
+
+            /*NEW PLAN: Create a loop that switches a certain character with the next. Once that character
+             * reaches the end, start with the 2nd (current/thewordagain?) character. Maybe this is encased
+             * within a while loop 
+             */
 
            for(int iterate = 0; iterate < input.length(); iterate++){
+
             thewordagain = input.toCharArray();
-            int iterate2 = 0;
-            //System.out.println("New iteration!");
-            for(int position = iterate + 1; iterate2 <= input.length()-1; iterate2++){
-                if(position +1 > input.length()){                    
-                    char tempchar = thewordagain[position-1];
-                    thewordagain[position-1] = thewordagain[0];
-                    thewordagain[0] = tempchar;
-                    //System.out.print("RESET: ");
-                    //System.out.println(thewordagain);
-                    position=1;
-                }
+           char temp = thewordagain[0];
+           thewordagain[0] = thewordagain[iterate];
+           thewordagain[iterate] = temp;
 
-            else{
-                char tempchar = thewordagain[position];          
-                thewordagain[position] = theword[iterate];
-                thewordagain[position - 1] = tempchar;
-                if(!possibilities.contains(String.valueOf(thewordagain))){
-                    possibilities.add(String.valueOf(thewordagain));
-                }
+          System.out.print("Next Main Change: ");
+          System.out.println(thewordagain);
+
+            String convert = String.valueOf(thewordagain);
+
+            for(int position = 1; position <input.length(); position++){
                 
-                position++;
+                thewordagain = convert.toCharArray();
+                int position2 = position;
+                int positionhelp = 1;
+                //System.out.println("New Letter Focus");
+                while(positionhelp +1 < input.length()){
 
+                    if(position + 1 >= input.length()){
+                            position = 1;
+                    }
+
+          
+                    temp = thewordagain[position + 1];
+                    thewordagain[position + 1] = thewordagain[position];
+                    thewordagain[position] = temp;
+                    position++;
+                    positionhelp++;
+
+                    
+
+                    if(!possibilities.contains(String.valueOf(thewordagain))){
+                    possibilities.add(String.valueOf(thewordagain));
+                    
                 }
+
+                    //System.out.println(thewordagain);
+                }
+                position = position2;
                 
             }
+
+
+
+/* 
+           for(int position = 1; position<input.length(); position++){
+                System.out.println("And now we do...");
+
+                while(position + 1 < input.length()){
+                    temp = tempchararr[position + 1];
+                    tempchararr[position + 1] = tempchararr[position];
+                    tempchararr[position] = temp;
+                    
+                    if(!possibilities.contains(String.valueOf(thewordagain))){
+                    possibilities.add(String.valueOf(thewordagain));
+                    
+                }
+
+                    System.out.println(tempchararr);
+                    position++;
+                    
+                }
+           }          */
+         }
+
+          
+//LETS TAKE IT BACK 
+
+/* 
+            char [] prebackwards = input.toCharArray();
+           int y = input.length()-1;
+           for(int x = 0; x< input.length(); x++){
+                prebackwards[x] = theword[y - x];
            }
 
+           String backwards = String.valueOf(prebackwards);
+           thewordagain = backwards.toCharArray();
+           theword = backwards.toCharArray();
+
+           for(int iterate = 0; iterate < input.length(); iterate++){     
+            thewordagain = input.toCharArray();
+            char temp = thewordagain[0];
+            thewordagain[0] = thewordagain[iterate];
+            thewordagain[iterate] = temp;
+            combocounter++;
+           System.out.println(thewordagain);
+
+           char [] tempchararr = thewordagain;
+
+           System.out.print("(BACK) NEW ITERATION: ");
+
+           for(int position = 1; position<input.length(); position++){
+                tempchararr = thewordagain;
+
+                while(position + 1 < input.length()){
+                    temp = tempchararr[position + 1];
+                    tempchararr[position + 1] = tempchararr[position];
+                    tempchararr[position] = temp;
+                    
+                    System.out.println(tempchararr);
+                    position++;
+                    combocounter++;
+                }
+           }     
+        } */
+
+        //System.out.println("Combo counter: " + combocounter);
+
            //REVERSE THE WORD
+
+           /* 
            char [] prebackwards = input.toCharArray();
            int y = input.length()-1;
            for(int x = 0; x< input.length(); x++){
                 prebackwards[x] = theword[y - x];
            }
 
-           //final char [] theword2 = backwards;
            String backwards = String.valueOf(prebackwards);
            thewordagain = backwards.toCharArray();
            theword = backwards.toCharArray();
-           //System.out.println("theword:"+ String.valueOf(theword)+ "; thewordagain:"+ String.valueOf(thewordagain));
-           //System.out.println("THE BACKWARDS WORD IS " + String.valueOf(backwards));
 
 
              for(int iterate = 0; iterate < input.length(); iterate++){
             thewordagain = backwards.toCharArray();
-            //System.out.println("New iteration");
             int iterate2 = 0;
             for(int position = iterate + 1; iterate2 <= input.length()-1; iterate2++){
                 if(position +1 > input.length()){                    
@@ -78,31 +165,25 @@ public static void main(String [] args) {
                     thewordagain[position-1] = thewordagain[0];
                     thewordagain[0] = tempchar;
                     position=1;
-                    //System.out.println(thewordagain);
                 }
 
             else{
-                char tempchar = thewordagain[position];    
-               // System.out.println("Letter in question: " + String.valueOf(backwards));      
+                char tempchar = thewordagain[position];        
                 thewordagain[position] = theword[iterate];
                 thewordagain[position - 1] = tempchar;
-                //System.out.println(thewordagain);
+
                 if(!possibilities.contains(String.valueOf(thewordagain))){
                     possibilities.add(String.valueOf(thewordagain));
-                }
-                
+                }       
                 position++;
-
                 }
                 
             }
-           }
-
-
+           } */
 
            System.out.println("Here are all the listed possibilities (A total of " + possibilities.size() + "): ");
            for(int x = 0; x<possibilities.size(); x++){
-               System.out.println(possibilities.get(x));
+             // System.out.println(possibilities.get(x));
            }
 
        }
