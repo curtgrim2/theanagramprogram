@@ -1,20 +1,22 @@
-#https://www.dictionaryapi.com/api/v3/references/collegiate/json/dad?key=f25abb33-a3be-4049-8767-f3b871339adc
 import sys
 import requests
+from dotenv import load_dotenv
 import os
 import unittest
 #from wordnik.swagger import *
 #from wordnik import WordApi, swagger
 
+load_dotenv()
+apikey = os.getenv("MWDict_API")
 allcombos=0
 correctcombos=0
 
 def printresult(printtheword):
     return ''.join(printtheword)
 
-def check_word_existence(word,api_key='f25abb33-a3be-4049-8767-f3b871339adc'):
+def check_word_existence(word,api_key):
 
-    api_url = f'https://www.dictionaryapi.com/api/v3/references/collegiate/json/{printresult(word)}?key={api_key}'
+    api_url = f'https://www.dictionaryapi.com/api/v3/references/collegiate/json/{printresult(word)}?key={apikey}'
     global allcombos
     global correctcombos
     try:
@@ -46,20 +48,18 @@ def check_word_existence(word,api_key='f25abb33-a3be-4049-8767-f3b871339adc'):
 
 def letsgotowork(theword,startindex,endindex):
     if startindex == endindex:
-        check_word_existence(theword,'f25abb33-a3be-4049-8767-f3b871339adc')
+        check_word_existence(theword,'Not Needed Anymore')
     else:
         for iterator in range(startindex,endindex):
             theword[startindex],theword[iterator]=theword[iterator],theword[startindex]
             letsgotowork(theword,startindex+1,endindex)
             theword[iterator],theword[startindex]=theword[startindex],theword[iterator]
 
-
+print(apikey)
 print('The Anagram Program...HI!')
 userinput = input("Please type in the word in question: ")
 endindex = len(userinput)
 theword = list(userinput)
-'''correctcombos=0
-allcombos=0'''
 letsgotowork(theword,0,endindex)
 print(f"TOTAL LETTER COMBINATIONS: {allcombos}")   
 print(f"ACTUAL WORDS FORMED: {correctcombos}")
