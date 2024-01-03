@@ -5,16 +5,19 @@ import os
 import unittest
 #from wordnik.swagger import *
 #from wordnik import WordApi, swagger
+#global allcombos
+allcombos=0
+#global correctcombos
+correctcombos=0
 
 def printresult(printtheword):
     return ''.join(printtheword)
 
 def check_word_existence(word,api_key='f25abb33-a3be-4049-8767-f3b871339adc'):
-    api_url = f'https://www.dictionaryapi.com/api/v3/references/collegiate/json/{printresult(word)}?key={api_key}'
-    #print(api_url)
-    correctcombos=0
-    allcombos=0
 
+    api_url = f'https://www.dictionaryapi.com/api/v3/references/collegiate/json/{printresult(word)}?key={api_key}'
+    global allcombos
+    global correctcombos
     try:
         response = requests.get(api_url)
         if response.status_code == 200:
@@ -26,11 +29,11 @@ def check_word_existence(word,api_key='f25abb33-a3be-4049-8767-f3b871339adc'):
                 metadata = confirm[0]['meta']
                 #print(f"{printresult(word)} has metadata:")
                 print(f"{printresult(word)} is a word")
-                ++correctcombos
-                ++allcombos
+                correctcombos=correctcombos+1
+                allcombos=allcombos+1
 
             else:
-                ++allcombos
+                allcombos=allcombos+1
                 #print("No metadata dude")
 
                     #print(printresult(word)+":IS A WORD")
@@ -64,8 +67,8 @@ theword = list(userinput)
 '''correctcombos=0
 allcombos=0'''
 letsgotowork(theword,0,endindex)
-'''print(f"TOTAL COMBINATIONS: {allcombos}")   
-print(f"ACTUAL WORDS: {correctcombos}") '''
+print(f"TOTAL LETTER COMBINATIONS: {allcombos}")   
+print(f"ACTUAL WORDS FORMED: {correctcombos}")
 
 
 '''apikey='f25abb33-a3be-4049-8767-f3b871339adc'
